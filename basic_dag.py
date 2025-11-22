@@ -18,7 +18,7 @@ dag = DAG(
     'basic_dag',
     default_args=default_args,
     description='A very basic DAG example',
-    schedule_interval=timedelta(days=1),  # Run daily
+    schedule=timedelta(days=1),  # Run daily (Airflow 3.x uses 'schedule' instead of 'schedule_interval')
     start_date=datetime(2024, 1, 1),
     catchup=False,  # Don't backfill past runs
     tags=['example', 'basic'],

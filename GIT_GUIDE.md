@@ -54,45 +54,65 @@ Shows all git settings for this repository.
 
 ## If You Want to Link This to GitHub
 
-### Option A: Initialize and Push to Existing GitHub Repo
+### ⚠️ Important: You MUST Create the GitHub Repository First!
+
+**Yes, you need to create the repository on GitHub's website (or via GitHub CLI) BEFORE you can link your local code to it.**
+
+---
+
+### Step-by-Step Process:
+
+#### Step 1: Create GitHub Repository (On GitHub Website)
+
+1. Go to **https://github.com** and log in
+2. Click the **"+"** icon in the top right → **"New repository"**
+3. Choose a repository name (e.g., `airflow-dags`)
+4. **Important:** Choose **"Public"** or **"Private"** (private recommended for DAGs)
+5. **DO NOT** initialize with README, .gitignore, or license (since you already have files)
+6. Click **"Create repository"**
+
+**GitHub will show you the repository URL** (something like `https://github.com/YOUR-USERNAME/REPO-NAME.git`)
+
+#### Step 2: Link Your Local Code to GitHub
+
+**Now run these commands in your terminal:**
 
 ```bash
-# 1. Initialize git repository
+# 1. Make sure you're in the right directory
+cd /Users/camillacalle/Downloads/DAGS
+
+# 2. Initialize git repository (if not already done)
 git init
 
-# 2. Add all files (respects .gitignore)
+# 3. Add all files (respects .gitignore - won't add credentials!)
 git add .
 
-# 3. Make initial commit
+# 4. Make initial commit
 git commit -m "Initial commit: Basic Airflow DAG"
 
-# 4. Link to your GitHub repository
+# 5. Link to your GitHub repository (use the URL from Step 1)
 git remote add origin https://github.com/YOUR-USERNAME/YOUR-REPO-NAME.git
 
-# 5. Verify remote
+# 6. Verify remote was added correctly
 git remote -v
 
-# 6. Push to GitHub
+# 7. Push to GitHub
 git branch -M main
 git push -u origin main
 ```
 
-### Option B: Create New GitHub Repo First
+---
 
-1. Go to GitHub.com
-2. Click "New Repository"
-3. **DON'T** initialize with README (since you already have files)
-4. Copy the repository URL
-5. Then run:
+### Alternative: Using GitHub CLI (If You Have It Installed)
+
+If you have `gh` (GitHub CLI) installed, you can create the repo from command line:
 
 ```bash
-git init
-git add .
-git commit -m "Initial commit"
-git remote add origin https://github.com/YOUR-USERNAME/YOUR-REPO-NAME.git
-git branch -M main
-git push -u origin main
+# Create repo on GitHub and link automatically
+gh repo create airflow-dags --private --source=. --remote=origin --push
 ```
+
+But **most people use the website method** (Step 1 above).
 
 ---
 
